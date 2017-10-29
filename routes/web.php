@@ -11,16 +11,10 @@
 |
 */
 
-
+/*
 Route::get('/', function () {
     return view('welcome');
 });
-/*
-Route::any('login', function () {
-    return "TG";
-})->name('login');
-//Route::get('/home', 'HomeController@index')->name('home');
-*/
-Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+*/

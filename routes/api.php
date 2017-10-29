@@ -13,15 +13,19 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::any('login', 'Auth\LoginController@login');
-Route::any('register', 'Auth\RegisterController@register');
+
+Route::prefix('user')->group(function () {
+    Route::post('login', 'Auth\LoginController@login');
+    Route::post('logout', 'Auth\LoginController@logout');
+    Route::post('register', 'Auth\RegisterController@register');
+});
 
 Route::middleware('auth:api')->group(function () {
-    Route::any('/user', function (Request $request) {
-        return $request->user();
+    Route::prefix('user')->group(function () {
+        Route::any('/', function (Request $request) {
+            return $request->user();
+        });
     });
-
-    Route::any('logout', 'Auth\LoginController@logout');
 
     Route::resource('software', 'SoftwareController', ['only' => [
         'index', 'show'
@@ -32,4 +36,3 @@ Route::middleware('auth:api')->group(function () {
     ]]);
 });
 
-Auth::routes();

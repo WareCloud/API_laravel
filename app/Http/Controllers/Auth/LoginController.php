@@ -78,8 +78,8 @@ class LoginController extends Controller
 
     protected function sendFailedLoginResponse(Request $request)
     {
-        $errors = [ 'error' => trans('auth.failed') ];
-
-        return response()->json($errors, 422);
+        return response()->json([
+            'error' => trans('auth.failed')
+        ], 422);
     }
 }

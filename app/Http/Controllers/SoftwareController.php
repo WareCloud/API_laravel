@@ -15,7 +15,7 @@ class SoftwareController extends Controller
     public function index()
     {
         $softwares = \App\Software::all();
-        return ['softwares' => $softwares];
+        return ['data' => $softwares];
     }
 
     /**
@@ -47,7 +47,7 @@ class SoftwareController extends Controller
      */
     public function show(Software $software)
     {
-        return redirect($software->download_url);
+        return ['data' => $software];
     }
 
     /**
