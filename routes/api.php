@@ -16,7 +16,6 @@ use Illuminate\Http\Request;
 
 Route::prefix('user')->group(function () {
     Route::post('login', 'Auth\LoginController@login');
-    Route::post('logout', 'Auth\LoginController@logout');
     Route::post('register', 'Auth\RegisterController@register');
 });
 
@@ -25,6 +24,7 @@ Route::middleware('auth:api')->group(function () {
         Route::any('/', function (Request $request) {
             return $request->user();
         });
+        Route::post('logout', 'Auth\LoginController@logout');
     });
 
     Route::resource('software', 'SoftwareController', ['only' => [
