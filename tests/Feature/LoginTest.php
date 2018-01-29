@@ -10,7 +10,7 @@ class LoginTest extends TestCase
 {
     public function testRequiresEmailAndLogin()
     {
-        $this->json('POST', 'api/user/login')
+        $this->json('POST', '/user/login')
             ->assertStatus(422)
             ->assertJson([
                 'message' => 'The given data was invalid.',
@@ -29,7 +29,7 @@ class LoginTest extends TestCase
 
         $payload = ['login' => $user->login, 'password' => 'admin'];
 
-        $this->json('POST', 'api/user/login', $payload)
+        $this->json('POST', '/user/login', $payload)
             ->assertStatus(200)
             ->assertJsonStructure([
                 'data' => [
