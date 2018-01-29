@@ -19,7 +19,7 @@ class CreateSoftwareTable extends Migration
             $table->string('version');
             $table->string('vendor');
             $table->string('vendor_url');
-            $table->string('comment');
+            $table->longText('comment');
             $table->string('download_url');
             $table->timestamps();
         });
