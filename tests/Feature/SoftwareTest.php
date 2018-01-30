@@ -13,7 +13,19 @@ class SoftwareTest extends TestCase
         $token = User::find(1)->generateToken();
         $this->json('GET', '/software', [], ['Authorization' => "Bearer $token"])
             ->assertStatus(200)
-            ->assertJsonFragment(['data']);
+            ->assertJsonStructure([
+                'data' => [
+                    [
+                        'id',
+                        'name',
+                        'version',
+                        'vendor',
+                        'vendor_url',
+                        'comment',
+                        'download_url'
+                    ]
+                ]
+            ]);
     }
 
     public function testGetSoftware()
@@ -21,7 +33,17 @@ class SoftwareTest extends TestCase
         $token = User::find(1)->generateToken();
         $this->json('GET', '/software/1', [], ['Authorization' => "Bearer $token"])
             ->assertStatus(200)
-            ->assertJsonFragment(['data']);
+            ->assertJsonStructure([
+                'data' => [
+                    'id',
+                    'name',
+                    'version',
+                    'vendor',
+                    'vendor_url',
+                    'comment',
+                    'download_url'
+                ]
+            ]);
     }
 
     public function testRequiresLogin()
