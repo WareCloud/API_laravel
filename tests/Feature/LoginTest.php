@@ -5,6 +5,7 @@ namespace Tests\Feature\Feature;
 use App\User;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Hash;
 
 class LoginTest extends TestCase
 {
@@ -24,7 +25,7 @@ class LoginTest extends TestCase
     public function testUserLoginsSuccessfully()
     {
         $user = factory(User::class)->create([
-            'password' => password_hash('admin', PASSWORD_BCRYPT, ['cost' => 12])
+            'password' => Hash::make('admin')
         ]);
 
         $payload = ['login' => $user->login, 'password' => 'admin'];
