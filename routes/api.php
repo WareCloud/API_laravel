@@ -33,6 +33,6 @@ Route::middleware('auth:api')->group(function () {
 
     Route::resource('configuration', 'ConfigurationController', ['only' => [
         'show'
-    ]]);
+    ]])->middleware('can:access,configuration');
 });
 
