@@ -8,7 +8,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ConfigurationTest extends TestCase
 {
-    public function testCanSuccessfullyAccessConfiguration()
+    public function testCanAccessConfiguration()
     {
         $token = User::find(1)->generateToken();
         $this->json('GET', '/configuration/1', [], ['Authorization' => "Bearer $token"])
@@ -23,7 +23,7 @@ class ConfigurationTest extends TestCase
             ->assertJson(['error' => 'Forbidden.']);
     }
 
-    public function testRequireLogin()
+    public function testRequiresLogin()
     {
         $this->json('GET', '/configuration/1')
             ->assertStatus(401)
