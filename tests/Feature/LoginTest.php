@@ -40,6 +40,22 @@ class LoginTest extends TestCase
                     'updated_at',
                     'api_token'
                 ]
+            ])
+            ->assertJson([
+                'data' => [
+                    'login' => $user->login
+                ]
+            ]);
+    }
+
+    public function testUserLoginsUnsuccessfully()
+    {
+        $payload = ['login' => 'admin', 'password' => 'wrong_password'];
+
+        $this->json('POST', '/user/login', $payload)
+            ->assertStatus(422)
+            ->assertJson([
+                'error' => 'These credentials do not match our records.'
             ]);
     }
 }
