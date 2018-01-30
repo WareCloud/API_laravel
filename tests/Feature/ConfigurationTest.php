@@ -22,4 +22,11 @@ class ConfigurationTest extends TestCase
             ->assertStatus(403)
             ->assertJson(['error' => 'Forbidden.']);
     }
+
+    public function testRequireLogin()
+    {
+        $this->json('GET', '/configuration/1')
+            ->assertStatus(401)
+            ->assertJson(['error' => 'Unauthenticated.']);
+    }
 }
