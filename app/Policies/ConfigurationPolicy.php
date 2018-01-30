@@ -22,6 +22,6 @@ class ConfigurationPolicy
 
     public function access(User $user, Configuration $configuration)
     {
-        return $user->id === $configuration->user_id;
+        return (int)$user->id === (int)$configuration->user_id;
     }
 }
