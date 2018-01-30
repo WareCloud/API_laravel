@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Hash;
 
 class LoginTest extends TestCase
 {
-    public function testRequiresEmailAndLogin()
+    public function testRequiresLoginAndPassword()
     {
         $this->json('POST', '/user/login')
             ->assertStatus(422)

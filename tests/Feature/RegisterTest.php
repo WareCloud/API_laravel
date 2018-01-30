@@ -28,7 +28,7 @@ class RegisterTest extends TestCase
             ]);
     }
 
-    public function testsRequiresPasswordEmailAndName()
+    public function testsRequiresLoginAndPassword()
     {
         $this->json('POST', '/user/register')
             ->assertStatus(422)
