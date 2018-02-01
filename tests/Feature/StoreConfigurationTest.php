@@ -141,7 +141,7 @@ class StoreConfigurationTest extends TestCase
             ->assertStatus(401)
             ->assertJson(['error' => 'Unauthenticated.']);
 
-        $this->json('POST', '/configuration', [],['Authorization' => "Bearer $wrongToken"])
+        $this->json('POST', '/configuration', [], ['Authorization' => "Bearer $wrongToken"])
             ->assertStatus(401)
             ->assertJson(['error' => 'Unauthenticated.']);
 
