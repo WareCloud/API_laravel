@@ -58,6 +58,7 @@ class ConfigurationController extends Controller
      */
     public function show(Configuration $configuration)
     {
+        $this->authorize('view', $configuration);
         return $configuration->content;
     }
 
