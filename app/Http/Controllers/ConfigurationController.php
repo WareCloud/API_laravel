@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Configuration;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ConfigurationController extends Controller
 {
@@ -35,7 +36,15 @@ class ConfigurationController extends Controller
      */
     public function store(Request $request)
     {
-        $configuration = Configuration::create($request->all());
+        $data = $request->validate([
+            'software_id' => 'required|exists:softwares,id',
+            'content' => 'required',
+        ]);
+        $configuration = Configuration::create([
+            'user_id' => Auth::guard('api')->id(),
+            'software_id' => $data['software_id'],
+            'content' => $data['content']
+        ]);
         return response()->json($configuration, 201);
     }
 
