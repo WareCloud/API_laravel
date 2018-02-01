@@ -35,7 +35,8 @@ class ConfigurationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $configuration = Configuration::create($request->all());
+        return response()->json($configuration, 201);
     }
 
     /**

@@ -12,4 +12,6 @@ class Configuration extends Model
      * @var string
      */
     protected $table = 'configurations';
+
+    protected $fillable = ['user_id', 'software_id', 'content'];
 }
