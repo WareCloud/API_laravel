@@ -22,7 +22,7 @@ Route::prefix('user')->group(function () {
 Route::middleware('auth:api')->group(function () {
     Route::prefix('user')->group(function () {
         Route::any('/', function (Request $request) {
-            return $request->user();
+            return ['data' => $request->user()];
         });
         Route::post('logout', 'Auth\LoginController@logout');
     });
@@ -32,9 +32,7 @@ Route::middleware('auth:api')->group(function () {
     ]]);
 
     Route::resource('configuration', 'ConfigurationController', ['only' => [
-        'show'
-    ]])->middleware('can:access,configuration');
-
-    Route::post('configuration', 'ConfigurationController@store');
+        'show', 'store'
+    ]]);
 });
 

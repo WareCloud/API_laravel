@@ -14,7 +14,7 @@ class StoreConfigurationTest extends TestCase
 
         $payload = [
             'software_id' => 1,
-            'content' => "this is some content"
+            'content' => 'this is some content'
         ];
 
         $this->json('POST', '/configuration', $payload, ['Authorization' => "Bearer $token"])
@@ -31,6 +31,8 @@ class StoreConfigurationTest extends TestCase
             ])
             ->assertJson([
                 'data' => [
+                    'user_id' => 1,
+                    'software_id' => 1,
                     'content' => $payload['content']
                 ]
             ]);
@@ -60,7 +62,7 @@ class StoreConfigurationTest extends TestCase
         $token = User::find(1)->generateToken();
 
         $payload = [
-            'content' => "this is some content"
+            'content' => 'this is some content'
         ];
 
         $this->json('POST', '/configuration', $payload, ['Authorization' => "Bearer $token"])
@@ -99,53 +101,29 @@ class StoreConfigurationTest extends TestCase
     {
         $token = User::find(1)->generateToken();
 
-        $payload1 = [
-            'software_id' => 11,
-            'content' => "this is some content"
+        $payloads = [
+            [
+                'software_id' => 0,
+                'content' => 'this is some content'
+            ],
+            [
+                'software_id' => -5,
+                'content' => 'this is some content'
+            ],
+            [
+                'software_id' => 'test',
+                'content' => 'this is some content'
+            ]
         ];
 
-        $payload2 = [
-            'software_id' => 11
-        ];
-
-        $payload3 = [
-            'software_id' => -5
-        ];
-
-        $this->json('POST', '/configuration', $payload1, ['Authorization' => "Bearer $token"])
+        foreach ($payloads as $payload)
+        $this->json('POST', '/configuration', $payload, ['Authorization' => "Bearer $token"])
             ->assertStatus(422)
             ->assertJson([
                 'message' => 'The given data was invalid.',
                 'errors' => [
                     'software_id' => [
                         'The selected software id is invalid.'
-                    ]
-                ]
-            ]);
-        $this->json('POST', '/configuration', $payload2, ['Authorization' => "Bearer $token"])
-            ->assertStatus(422)
-            ->assertJson([
-                'message' => 'The given data was invalid.',
-                'errors' => [
-                    'software_id' => [
-                        'The selected software id is invalid.'
-                    ],
-                    "content" => [
-                        "The content field is required."
-                    ]
-                ]
-            ]);
-
-        $this->json('POST', '/configuration', $payload3, ['Authorization' => "Bearer $token"])
-            ->assertStatus(422)
-            ->assertJson([
-                'message' => 'The given data was invalid.',
-                'errors' => [
-                    'software_id' => [
-                        'The selected software id is invalid.'
-                    ],
-                    "content" => [
-                        "The content field is required."
                     ]
                 ]
             ]);
@@ -153,10 +131,10 @@ class StoreConfigurationTest extends TestCase
 
     public function testRequiresLogin()
     {
-        $wrongToken = "wrongtoken";
+        $wrongToken = 'wrongtoken';
         $payload = [
             'software_id' => 1,
-            'content' => "this is some content"
+            'content' => 'this is some content'
         ];
 
         $this->json('POST', '/configuration')
@@ -167,7 +145,7 @@ class StoreConfigurationTest extends TestCase
             ->assertStatus(401)
             ->assertJson(['error' => 'Unauthenticated.']);
 
-        $this->json('POST', '/configuration', $payload,['Authorization' => "Bearer $wrongToken"])
+        $this->json('POST', '/configuration', $payload, ['Authorization' => "Bearer $wrongToken"])
             ->assertStatus(401)
             ->assertJson(['error' => 'Unauthenticated.']);
 

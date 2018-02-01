@@ -21,16 +21,20 @@ class UserTest extends TestCase
         $this->json('GET', '/user', [], ['Authorization' => "Bearer $token"])
             ->assertStatus(200)
             ->assertJsonStructure([
-                'id',
-                'login',
-                'created_at',
-                'updated_at',
-                'api_token'
+                'data' => [
+                    'id',
+                    'login',
+                    'created_at',
+                    'updated_at',
+                    'api_token'
+                ]
             ])
             ->assertJson([
-                'id' => 1,
-                'login' => 'admin',
-                'api_token' => $token
+                'data' => [
+                    'id' => 1,
+                    'login' => 'admin',
+                    'api_token' => $token
+                ]
             ]);
     }
 }

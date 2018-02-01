@@ -38,7 +38,7 @@ class ConfigurationController extends Controller
     {
         $data = $request->validate([
             'software_id' => 'required|exists:softwares,id',
-            'content' => 'required',
+            'content' => 'required'
         ]);
         $configuration = Configuration::create([
             'user_id' => Auth::guard('api')->id(),
@@ -46,7 +46,7 @@ class ConfigurationController extends Controller
             'content' => $data['content']
         ]);
         return response()->json([
-            'data' => $configuration->toArray(),
+            'data' => $configuration
         ], 201);
     }
 
