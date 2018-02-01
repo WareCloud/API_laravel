@@ -6,7 +6,7 @@ use App\User;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class ConfigurationTest extends TestCase
+class AccessConfigurationTest extends TestCase
 {
     public function testCanAccessConfiguration()
     {

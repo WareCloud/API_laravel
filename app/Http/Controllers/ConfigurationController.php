@@ -45,7 +45,9 @@ class ConfigurationController extends Controller
             'software_id' => $data['software_id'],
             'content' => $data['content']
         ]);
-        return response()->json($configuration, 201);
+        return response()->json([
+            'data' => $configuration->toArray(),
+        ], 201);
     }
 
     /**
