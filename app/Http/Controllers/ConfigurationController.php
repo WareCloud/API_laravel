@@ -18,15 +18,18 @@ class ConfigurationController extends Controller
     {
         $configurations = Configuration::all();
         $list = [];
+        $user_id = Auth::guard('api')->id();
         foreach ($configurations as $config) {
-            $software = Software::find($config['software_id']);
-            $temp = [
-                "configuration_id" => $config['id'],
-                "software" => $software,
-                "created_at" => $config['created_at'],
-                "updated_at" => $config['updated_at']
-            ];
-            array_push($list, $temp);
+            if ($config['user_id'] === $user_id) {
+                $software = Software::find($config['software_id']);
+                $temp = [
+                    "configuration_id" => $config['id'],
+                    "software" => $software,
+                    "created_at" => $config['created_at'],
+                    "updated_at" => $config['updated_at']
+                ];
+                array_push($list, $temp);
+            }
         }
 
         return response()->json([
