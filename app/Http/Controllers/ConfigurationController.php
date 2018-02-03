@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Configuration;
+use App\Software;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,7 +16,22 @@ class ConfigurationController extends Controller
      */
     public function index()
     {
-        //
+        $configurations = Configuration::all();
+        $list = [];
+        foreach ($configurations as $config) {
+            $software = Software::find($config['software_id']);
+            $temp = [
+                "configuration_id" => $config['id'],
+                "software" => $software,
+                "created_at" => $config['created_at'],
+                "updated_at" => $config['updated_at']
+            ];
+            array_push($list, $temp);
+        }
+
+        return response()->json([
+            'data' => $list
+        ], 200);
     }
 
     /**
