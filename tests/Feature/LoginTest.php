@@ -3,23 +3,23 @@
 namespace Tests\Feature\Feature;
 
 use App\User;
-use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Hash;
+use Tests\EndpointTest;
 
-class LoginTest extends TestCase
+class LoginTest extends EndpointTest
 {
-    public function testRequiresLoginAndPassword()
+    public function testRequiredFields()
     {
-        $this->json('POST', '/user/login')
-            ->assertStatus(422)
-            ->assertJson([
-                'message' => 'The given data was invalid.',
-                'errors' => [
-                    'login' => ['The login field is required.'],
-                    'password' => ['The password field is required.']
-                ]
-            ]);
+        $errors = [
+            'login'     => ['The login field is required.'],
+            'password'  => ['The password field is required.']
+        ];
+
+        $endpoints = [
+            ['endpoint' => '/user/login', 'methods' => ['POST'], 'errors' => $errors]
+        ];
+
+        $this->verifyEndpointsFields($endpoints, [], null);
     }
 
     public function testUserLoginsSuccessfully()
@@ -28,9 +28,9 @@ class LoginTest extends TestCase
             'password' => Hash::make('admin')
         ]);
 
-        $payload = ['login' => $user->login, 'password' => 'admin'];
+        $data = ['login' => $user->login, 'password' => 'admin'];
 
-        $this->json('POST', '/user/login', $payload)
+        $this->json('POST', '/user/login', $data)
             ->assertStatus(200)
             ->assertJsonStructure([
                 'data' => [
@@ -50,12 +50,8 @@ class LoginTest extends TestCase
 
     public function testUserLoginsUnsuccessfully()
     {
-        $payload = ['login' => 'admin', 'password' => 'wrong_password'];
+        $data = ['login' => 'admin', 'password' => 'wrong_password'];
 
-        $this->json('POST', '/user/login', $payload)
-            ->assertStatus(422)
-            ->assertJson([
-                'error' => 'These credentials do not match our records.'
-            ]);
+        $this->verifyCantAccessEndpoint('POST', '/user/login', 'login_failed', $data,null);
     }
 }

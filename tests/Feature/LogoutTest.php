@@ -3,12 +3,11 @@
 namespace Tests\Feature;
 
 use App\User;
-use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\EndpointTest;
 
-class LogoutTest extends TestCase
+class LogoutTest extends EndpointTest
 {
-    public function testUserIsLoggedOutProperly()
+    public function testCanAccess()
     {
         $user = factory(User::class)->create();
         $token = $user->generateToken();
@@ -20,7 +19,7 @@ class LogoutTest extends TestCase
         $this->assertEquals(null, $user->api_token);
     }
 
-    public function testUserWithNullToken()
+    public function testCantAccess()
     {
         // Simulating login
         $user = factory(User::class)->create();
@@ -30,6 +29,6 @@ class LogoutTest extends TestCase
         $user->api_token = null;
         $user->save();
 
-        $this->json('POST', '/user/logout', [], ['Authorization' => "Bearer $token"])->assertStatus(401);
+        $this->verifyCantAccessEndpoint('POST', '/user/logout', 'unauthenticated', [], $token);
     }
 }

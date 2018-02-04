@@ -53,9 +53,7 @@ class LoginController extends Controller
             $user = $this->guard()->user();
             $user->generateToken();
 
-            return response()->json([
-                'data' => $user
-            ], 200);
+            return ['data' => $user];
         }
 
         return $this->sendFailedLoginResponse($request);
@@ -71,9 +69,7 @@ class LoginController extends Controller
             $user->save();
         }
 
-        return response()->json([
-            'data' => 'User logged out.'
-        ], 200);
+        return ['data' => 'User logged out.'];
     }
 
     protected function sendFailedLoginResponse(Request $request)

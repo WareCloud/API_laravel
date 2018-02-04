@@ -65,6 +65,7 @@ class ConfigurationController extends Controller
     public function show(Configuration $configuration)
     {
         $this->authorize('view', $configuration);
+
         return $configuration->content;
     }
 
@@ -88,7 +89,17 @@ class ConfigurationController extends Controller
      */
     public function update(Request $request, Configuration $configuration)
     {
-        //
+        $this->authorize('update', $configuration);
+
+        $data = $request->validate([
+            'content' => 'required'
+        ]);
+
+        $configuration->update([
+            'content' => $data['content']
+        ]);
+
+        return ['data' => $configuration];
     }
 
     /**
@@ -99,6 +110,9 @@ class ConfigurationController extends Controller
      */
     public function destroy(Configuration $configuration)
     {
-        //
+        $this->authorize('delete', $configuration);
+
+        $configuration->delete();
+        return response()->json(null, 204);
     }
 }

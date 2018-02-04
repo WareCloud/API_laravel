@@ -32,7 +32,7 @@ Route::middleware('auth:api')->group(function () {
     ]]);
 
     Route::resource('configuration', 'ConfigurationController', ['only' => [
-        'index', 'show', 'store'
+        'index', 'show', 'store', 'update', 'destroy'
     ]]);
 });
 

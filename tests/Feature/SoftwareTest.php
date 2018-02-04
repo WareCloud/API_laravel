@@ -3,10 +3,9 @@
 namespace Tests\Feature;
 
 use App\User;
-use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\EndpointTest;
 
-class SoftwareTest extends TestCase
+class SoftwareTest extends EndpointTest
 {
     public function testGetSoftwares()
     {
@@ -48,12 +47,15 @@ class SoftwareTest extends TestCase
 
     public function testRequiresLogin()
     {
-        $this->json('GET', '/software')
-            ->assertStatus(401)
-            ->assertJson(['error' => 'Unauthenticated.']);
+        $endpoints = [
+            ['endpoint' => '/software',     'methods' => ['GET']],
+            ['endpoint' => '/software/1',   'methods' => ['GET']]
+        ];
 
-        $this->json('GET', '/software/1')
-            ->assertStatus(401)
-            ->assertJson(['error' => 'Unauthenticated.']);
+        foreach ($endpoints as $endpoint)
+        {
+            foreach ($endpoint['methods'] as $method)
+                $this->verifyCantAccessEndpoint($method, $endpoint['endpoint'], 'unauthenticated', [], 'wrongtoken');
+        }
     }
 }

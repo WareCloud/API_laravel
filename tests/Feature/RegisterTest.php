@@ -2,20 +2,19 @@
 
 namespace Tests\Feature;
 
-use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\EndpointTest;
 
-class RegisterTest extends TestCase
+class RegisterTest extends EndpointTest
 {
     public function testRegistersSuccessfully()
     {
-        $payload = [
-            'login' => 'WareCloudTest',
-            'password' => 'WareCloudTest123',
+        $data = [
+            'login'                 => 'WareCloudTest',
+            'password'              => 'WareCloudTest123',
             'password_confirmation' => 'WareCloudTest123'
         ];
 
-        $this->json('POST', '/user/register', $payload)
+        $this->json('POST', '/user/register', $data)
             ->assertStatus(201)
             ->assertJsonStructure([
                 'data' => [
@@ -28,55 +27,41 @@ class RegisterTest extends TestCase
             ])
             ->assertJson([
                 'data' => [
-                    'login' => $payload['login']
+                    'login' => $data['login']
                 ]
             ]);
     }
 
-    public function testRequiresLoginAndPassword()
+    public function testRequiredFields()
     {
-        $this->json('POST', '/user/register')
-            ->assertStatus(422)
-            ->assertJson([
-                'message' => 'The given data was invalid.',
-                'errors' => [
-                    'login' => ['The login field is required.'],
-                    'password' => ['The password field is required.']
-                ]
-            ]);
-    }
-
-    public function testRequiresPasswordConfirmation()
-    {
-        $payload = [
-            'login' => 'WareCloudTest',
-            'password' => 'WareCloudTestl123'
+        $errors = [
+            'login'                 => ['The login field is required.'],
+            'password'              => ['The password field is required.'],
+            'password_confirmation' => ['The password confirmation field is required.']
         ];
 
-        $this->json('POST', '/user/register', $payload)
-            ->assertStatus(422)
-            ->assertJson([
-                'message' => 'The given data was invalid.',
-                'errors' => [
-                    'password' => ['The password confirmation does not match.']
-                ]
-            ]);
+        $endpoints = [
+            ['endpoint' => '/user/register', 'methods' => ['POST'], 'errors' => $errors],
+        ];
+
+        $this->verifyEndpointsFields($endpoints, [], null);
     }
 
     public function testLoginAlreadyTaken()
     {
-        $payload = [
-            'login' => 'admin',
-            'password' => 'admin'
+        $datas = [
+            ['login' => 'admin', 'password' => 'admin', 'password_confirmation' => 'admin']
         ];
 
-        $this->json('POST', '/user/register', $payload)
-            ->assertStatus(422)
-            ->assertJson([
-                'message' => 'The given data was invalid.',
-                'errors' => [
-                    'login' => ['The login has already been taken.']
-                ]
-            ]);
+
+        $errors = [
+            'login' => ['The login has already been taken.']
+        ];
+
+        $endpoints = [
+            ['endpoint' => '/user/register', 'methods' => ['POST'], 'errors' => $errors],
+        ];
+
+        $this->verifyEndpointsFields($endpoints, $datas, null);
     }
 }

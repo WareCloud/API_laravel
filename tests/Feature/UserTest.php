@@ -3,16 +3,13 @@
 namespace Tests\Feature;
 
 use App\User;
-use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\EndpointTest;
 
-class UserTest extends TestCase
+class UserTest extends EndpointTest
 {
     public function testRequiresLogin()
     {
-        $this->json('GET', '/user')
-            ->assertStatus(401)
-            ->assertJson(['error' => 'Unauthenticated.']);
+        $this->verifyCantAccessEndpoint('GET', '/user', 'unauthenticated', [], null);
     }
 
     public function testGetUser()
@@ -31,8 +28,8 @@ class UserTest extends TestCase
             ])
             ->assertJson([
                 'data' => [
-                    'id' => 1,
-                    'login' => 'admin',
+                    'id'        => 1,
+                    'login'     => 'admin',
                     'api_token' => $token
                 ]
             ]);
