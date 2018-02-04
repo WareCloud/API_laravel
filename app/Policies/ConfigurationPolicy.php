@@ -19,7 +19,7 @@ class ConfigurationPolicy
      */
     public function view(User $user, Configuration $configuration)
     {
-        return (int)$user->id === (int)$configuration->user_id;
+        return $this->access($user, $configuration);
     }
 
     /**
@@ -42,7 +42,7 @@ class ConfigurationPolicy
      */
     public function update(User $user, Configuration $configuration)
     {
-        //
+        return $this->access($user, $configuration);
     }
 
     /**
@@ -54,6 +54,11 @@ class ConfigurationPolicy
      */
     public function delete(User $user, Configuration $configuration)
     {
-        //
+        return $this->access($user, $configuration);
+    }
+
+    public function access(User $user, Configuration $configuration)
+    {
+        return (int)$user->id === (int)$configuration->user_id;
     }
 }

@@ -16,25 +16,12 @@ class ConfigurationController extends Controller
      */
     public function index()
     {
-        $configurations = Configuration::all();
-        $list = [];
-        $user_id = Auth::guard('api')->id();
-        foreach ($configurations as $config) {
-            if ($config['user_id'] === $user_id) {
-                $software = Software::find($config['software_id']);
-                $temp = [
-                    "configuration_id" => $config['id'],
-                    "software" => $software,
-                    "created_at" => $config['created_at'],
-                    "updated_at" => $config['updated_at']
-                ];
-                array_push($list, $temp);
-            }
-        }
+        $configurations = \App\Configuration::with('software:id,name,vendor,vendor_url')
+            ->where('user_id', Auth::guard('api')->user()->id)
+            ->get()
+            ->makeHidden(['user_id', 'software_id', 'content']);
 
-        return response()->json([
-            'data' => $list
-        ], 200);
+        return ['data' => $configurations];
     }
 
     /**

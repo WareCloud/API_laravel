@@ -14,4 +14,9 @@ class Configuration extends Model
     protected $table = 'configurations';
 
     protected $fillable = ['user_id', 'software_id', 'content'];
+
+    public function software()
+    {
+        return $this->belongsTo(Software::class);
+    }
 }
