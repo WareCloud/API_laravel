@@ -54,7 +54,7 @@ class SoftwaresTableDataSeeder extends Seeder
             'vendor_url'    => 'http://www.7-zip.org',
             'comment'       => 'FileZilla Client est un client FTP, FTPS et SFTP, développé sous la licence publique générale GNU. Il existe également un logiciel de serveur FTP du nom de FileZilla Server. Le logiciel est disponible pour Windows, Mac OS X et Linux.',
             'download_url'  => 'http://www.7-zip.org/a/7z1604-x64.exe',
-            'icon_url'      => 'https://upload.wikimedia.org/wikipedia/commons/f/f2/7ziplogo.svg'
+            'icon_url'      => 'https://camo.githubusercontent.com/6a957d88455d0565f24f3fa184de4ca6fe8dadca/68747470733a2f2f63646e2e7261776769742e636f6d2f6178656c73747564696f732f377a2f66643133653363382f69636f6e2e737667'
         ],
         [
             'name'          => 'TeamViewer',
@@ -63,7 +63,7 @@ class SoftwaresTableDataSeeder extends Seeder
             'vendor_url'    => 'https://www.teamviewer.com',
             'comment'       => 'TeamViewer est un logiciel propriétaire de télémaintenance disposant de fonctions de bureau à distance, de téléadministration, de conférence en ligne et de transfert de fichiers.',
             'download_url'  => 'https://download.teamviewer.com/download/TeamViewer_Setup.exe',
-            'icon_url'      => 'https://upload.wikimedia.org/wikipedia/commons/8/8c/Antu_teamviewer.svg'
+            'icon_url'      => 'https://upload.wikimedia.org/wikipedia/commons/3/31/TeamViewer_Logo_Icon_Only.svg'
         ],
         [
             'name'          => 'Dropbox',
@@ -79,7 +79,7 @@ class SoftwaresTableDataSeeder extends Seeder
             'version'       => '2.2.8',
             'vendor'        => 'VideoLAN',
             'vendor_url'    => 'https://www.videolan.org/vlc',
-            'comment'       => 'VLC media player (VLC) (à l\'origine VideoLAN Client) est un lecteur multimédia libre issu du projet VideoLAN7. Ce logiciel est multiplateforme puisqu\'il fonctionne sous Windows, toutes les tendances GNU/Linux, BSD, OS X, iOS, BeOS, Solaris, Android8, QNX et Pocket PC soit en tout près de 20 plates-formes. Il est distribué sous licence GNU GPL.',
+            'comment'       => 'VLC media player (VLC) (à l\'origine VideoLAN Client) est un lecteur multimédia libre issu du projet VideoLAN. Ce logiciel est multiplateforme puisqu\'il fonctionne sous Windows, toutes les tendances GNU/Linux, BSD, OS X, iOS, BeOS, Solaris, Android8, QNX et Pocket PC soit en tout près de 20 plates-formes. Il est distribué sous licence GNU GPL.',
             'download_url'  => 'http://ftp.free.org/mirrors/videolan/vlc/2.2.8/win32/vlc-2.2.8-win32.exe',
             'icon_url'      => 'https://upload.wikimedia.org/wikipedia/commons/e/e6/VLC_Icon.svg'
         ],
