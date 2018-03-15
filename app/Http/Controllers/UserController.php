@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -61,15 +64,58 @@ class UserController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update password in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function updatePassword(Request $request)
     {
-        //
+        $user = Auth::guard('api')->user();
+
+        if (!Hash::check($request->input('password'), $user->password))
+        {
+            return response()->json([
+                'error' => 'Wrong password'
+            ], 422);
+        }
+
+        $this->validate($request, [
+            'password' => 'required|string|min:6',
+            'new_password' => 'required|string|min:6|confirmed',
+            'new_password_confirmation' => 'required|string|min:6'
+        ]);
+
+        $user->password = Hash::make($request->input('new_password'));
+
+        $user->save();
+
+        return response()->json([
+            'data' => $user
+        ], 200);
+    }
+
+    /**
+     * Update username in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function updateLogin(Request $request)
+    {
+        $user = Auth::guard('api')->user();
+
+        $this->validate($request, [
+            'login' => 'required|string|max:191|unique:users'
+        ]);
+
+        $user->login = $request->input('login');
+
+        $user->save();
+
+        return response()->json([
+            'data' => $user
+        ], 200);
     }
 
     /**
