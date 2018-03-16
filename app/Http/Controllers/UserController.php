@@ -73,43 +73,20 @@ class UserController extends Controller
     {
         $user = Auth::guard('api')->user();
 
-        if (!Hash::check($request->input('password'), $user->password))
-        {
-            return response()->json([
-                'error' => 'Wrong password'
-            ], 422);
-        }
-
         $this->validate($request, [
-            'password' => 'required|string|min:6',
+            'password' => 'required|string',
             'new_password' => 'required|string|min:6|confirmed',
             'new_password_confirmation' => 'required|string|min:6'
         ]);
 
+        if (!Hash::check($request->input('password'), $user->password))
+        {
+            return response()->json([
+                'error' => 'Invalid password.'
+            ], 422);
+        }
+
         $user->password = Hash::make($request->input('new_password'));
-
-        $user->save();
-
-        return response()->json([
-            'data' => $user
-        ], 200);
-    }
-
-    /**
-     * Update username in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function updateLogin(Request $request)
-    {
-        $user = Auth::guard('api')->user();
-
-        $this->validate($request, [
-            'login' => 'required|string|max:191|unique:users'
-        ]);
-
-        $user->login = $request->input('login');
 
         $user->save();
 

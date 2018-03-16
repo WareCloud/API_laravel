@@ -25,10 +25,7 @@ Route::middleware('auth:api')->group(function () {
             return ['data' => $request->user()];
         });
         Route::post('logout', 'Auth\LoginController@logout');
-        Route::prefix('update')->group(function () {
-            Route::post('login', 'UserController@updateLogin');
-            Route::post('password', 'UserController@updatePassword');
-        });
+        Route::post('password', 'UserController@updatePassword');
     });
 
     Route::resource('software', 'SoftwareController', ['only' => [

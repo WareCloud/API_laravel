@@ -117,9 +117,9 @@ class ConfigurationTest extends EndpointTest
         ];
 
         $datas = [
-            [ 'software_id' => 0,       'content' => 'this is some content'],
-            [ 'software_id' => -5,      'content' => 'this is some content'],
-            [ 'software_id' => 'test',  'content' => 'this is some content']
+            ['software_id' => 0,       'content' => 'this is some content'],
+            ['software_id' => -5,      'content' => 'this is some content'],
+            ['software_id' => 'test',  'content' => 'this is some content']
         ];
 
         $this->verifyEndpointsFields($endpoints, $datas, $token);
