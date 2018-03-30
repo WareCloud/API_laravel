@@ -18,7 +18,7 @@ class SoftwaresTableDataSeeder extends Seeder
             'vendor_url'    => 'https://notepad-plus-plus.org',
             'comment'       => 'Notepad++ is a free (as in "free speech" and also as in "free beer") source code editor and Notepad replacement that supports several languages. Running in the MS Windows environment, its use is governed by GPL License.',
             'download_url'  => 'https://notepad-plus-plus.org/repository/7.x/7.5.1/npp.7.5.1.Installer.exe',
-            'icon_url'      => 'https://upload.wikimedia.org/wikipedia/commons/f/f5/Notepad_plus_plus.png'
+            'icon_url'      => '/images/softwares/Notepad.png'
         ],
         [
             'name'          => 'Firefox',
@@ -27,7 +27,7 @@ class SoftwaresTableDataSeeder extends Seeder
             'vendor_url'    => 'https://www.mozilla.org/firefox',
             'comment'       => 'Mozilla Firefox est un navigateur web libre et gratuit, développé et distribué par la Mozilla Foundation avec l\'aide de milliers de bénévoles grâce aux méthodes de développement du logiciel libre/open source et à la liberté du code source.',
             'download_url'  => 'https://stubdownloader.cdn.mozilla.net/builds/firefox-stub/fr/win/e7ea3ce59fac6d44b18980dd562df0d3c43bb95805d396fddb298da4c3603dc0/Firefox%20Installer.exe',
-            'icon_url'      => 'https://upload.wikimedia.org/wikipedia/commons/6/67/Firefox_Logo%2C_2017.svg'
+            'icon_url'      => '/images/softwares/Firefox.svg'
         ],
         [
             'name'          => 'Skype',
@@ -36,25 +36,25 @@ class SoftwaresTableDataSeeder extends Seeder
             'vendor_url'    => 'https://www.skype.com',
             'comment'       => 'Skype est un logiciel qui permet aux utilisateurs de passer des appels téléphoniques ou vidéo via Internet, ainsi que le partage d\'écran.',
             'download_url'  => 'https://download.skype.com/1e7b2f639d4b3d3de4d0bb158c680cab/SkypeSetupFull.exe',
-            'icon_url'      => 'https://cdn.svgporn.com/logos/skype.svg'
+            'icon_url'      => '/images/softwares/Skype.svg'
         ],
         [
-            'name'          => 'FileZilla Client',
+            'name'          => 'FileZilla',
             'version'       => '3.30',
             'vendor'        => 'Tim Kosse',
             'vendor_url'    => 'https://filezilla-project.org',
             'comment'       => 'FileZilla Client est un client FTP, FTPS et SFTP, développé sous la licence publique générale GNU. Il existe également un logiciel de serveur FTP du nom de FileZilla Server. Le logiciel est disponible pour Windows, Mac OS X et Linux.',
             'download_url'  => 'https://download.filezilla-project.org/client/FileZilla_3.30.0_win64-setup_bundled.exe',
-            'icon_url'      => 'https://upload.wikimedia.org/wikipedia/commons/0/01/FileZilla_logo.svg'
+            'icon_url'      => '/images/softwares/FileZilla.svg'
         ],
         [
             'name'          => '7-Zip',
             'version'       => '16.04',
             'vendor'        => 'Igor Pavlov',
             'vendor_url'    => 'http://www.7-zip.org',
-            'comment'       => 'FileZilla Client est un client FTP, FTPS et SFTP, développé sous la licence publique générale GNU. Il existe également un logiciel de serveur FTP du nom de FileZilla Server. Le logiciel est disponible pour Windows, Mac OS X et Linux.',
+            'comment'       => '7-Zip est un logiciel de compression de données et d’archivage de fichiers fonctionnant sous Windows développé par le Russe Igor Pavlov.',
             'download_url'  => 'http://www.7-zip.org/a/7z1604-x64.exe',
-            'icon_url'      => 'https://camo.githubusercontent.com/6a957d88455d0565f24f3fa184de4ca6fe8dadca/68747470733a2f2f63646e2e7261776769742e636f6d2f6178656c73747564696f732f377a2f66643133653363382f69636f6e2e737667'
+            'icon_url'      => '/images/softwares/7Zip.svg'
         ],
         [
             'name'          => 'TeamViewer',
@@ -63,7 +63,7 @@ class SoftwaresTableDataSeeder extends Seeder
             'vendor_url'    => 'https://www.teamviewer.com',
             'comment'       => 'TeamViewer est un logiciel propriétaire de télémaintenance disposant de fonctions de bureau à distance, de téléadministration, de conférence en ligne et de transfert de fichiers.',
             'download_url'  => 'https://download.teamviewer.com/download/TeamViewer_Setup.exe',
-            'icon_url'      => 'https://upload.wikimedia.org/wikipedia/commons/3/31/TeamViewer_Logo_Icon_Only.svg'
+            'icon_url'      => '/images/softwares/TeamViewer.svg'
         ],
         [
             'name'          => 'Dropbox',
@@ -72,16 +72,16 @@ class SoftwaresTableDataSeeder extends Seeder
             'vendor_url'    => 'https://www.dropbox.com',
             'comment'       => 'Dropbox est un service de stockage et de partage de copies de fichiers locaux en ligne proposé par Dropbox, Inc., entreprise localisée à San Francisco, en Californie.',
             'download_url'  => 'https://www.dropbox.com/download?os=win',
-            'icon_url'      => 'https://upload.wikimedia.org/wikipedia/commons/7/78/Dropbox_Icon.svg'
+            'icon_url'      => '/images/softwares/Dropbox.svg'
         ],
         [
-            'name'          => 'VLC media player',
+            'name'          => 'VLC',
             'version'       => '2.2.8',
             'vendor'        => 'VideoLAN',
             'vendor_url'    => 'https://www.videolan.org/vlc',
             'comment'       => 'VLC media player (VLC) (à l\'origine VideoLAN Client) est un lecteur multimédia libre issu du projet VideoLAN. Ce logiciel est multiplateforme puisqu\'il fonctionne sous Windows, toutes les tendances GNU/Linux, BSD, OS X, iOS, BeOS, Solaris, Android8, QNX et Pocket PC soit en tout près de 20 plates-formes. Il est distribué sous licence GNU GPL.',
             'download_url'  => 'http://ftp.free.org/mirrors/videolan/vlc/2.2.8/win32/vlc-2.2.8-win32.exe',
-            'icon_url'      => 'https://upload.wikimedia.org/wikipedia/commons/e/e6/VLC_Icon.svg'
+            'icon_url'      => '/images/softwares/VLC.svg'
         ],
         [
             'name'          => 'Slack',
@@ -90,7 +90,7 @@ class SoftwaresTableDataSeeder extends Seeder
             'vendor_url'    => 'https://slack.com',
             'comment'       => 'Slack est une plate-forme de communication collaborative propriétaire ainsi qu\'un logiciel de gestion de projets créé par Stewart Butterfield en août 2013 et officiellement lancée en février 2014.',
             'download_url'  => 'https://downloads.slack-edge.com/releases_x64/SlackSetup.exe',
-            'icon_url'      => 'https://cdn.svgporn.com/logos/slack.svg'
+            'icon_url'      => '/images/softwares/Slack.svg'
         ],
         [
             'name'          => 'Sublime Text',
@@ -99,7 +99,16 @@ class SoftwaresTableDataSeeder extends Seeder
             'vendor_url'    => 'https://www.sublimetext.com',
             'comment'       => 'Sublime Text est un éditeur de texte générique codé en C++ et Python, disponible sur Windows, Mac et Linux. Le logiciel a été conçu tout d\'abord comme une extension pour Vim, riche en fonctionnalités.',
             'download_url'  => 'https://download.sublimetext.com/Sublime%20Text%20Build%203143%20x64%20Setup.exe',
-            'icon_url'      => 'https://iconscout.blob.core.windows.net/private/icon/free/svg/sublime-31d31178e68c27f4.svg?se=2018-03-08T17%3A53%3A42Z&sr=b&sp=r&&sig=8fNCiPdjblDcZlxWVOnHYTLYgZdsge4HnY%2Bvsh8b4xI%3D&sv=2015-04-05'
+            'icon_url'      => '/images/softwares/SublimeText.svg'
+        ],
+        [
+            'name'          => 'Google Chrome',
+            'version'       => '64.0.3282.186',
+            'vendor'        => 'Google',
+            'vendor_url'    => 'https://www.google.com/chrome',
+            'comment'       => 'Chrome est un navigateur web propriétaire développé par Google basé sur le projet libre Chromium fonctionnant sous Windows, Mac, Linux, Android et iOS.',
+            'download_url'  => 'https://dl.google.com/tag/s/appguid%3D%7B8A69D345-D564-463C-AFF1-A69D9E530F96%7D%26iid%3D%7B8BCDC9DE-378B-437D-48C3-3836E73B6ACA%7D%26lang%3Dfr%26browser%3D4%26usagestats%3D0%26appname%3DGoogle%2520Chrome%26needsadmin%3Dprefers%26ap%3Dx64-stable-statsdef_1%26installdataindex%3Ddefaultbrowser/update2/installers/ChromeSetup.exe',
+            'icon_url'      => '/images/softwares/GoogleChrome.svg'
         ]];
 
         foreach ($softwares as $software)

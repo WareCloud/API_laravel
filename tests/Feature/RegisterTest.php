@@ -72,7 +72,6 @@ class RegisterTest extends EndpointTest
             ['login' => 'admin', 'password' => 'admin', 'password_confirmation' => 'admin']
         ];
 
-
         $errors = [
             'login' => ['The login has already been taken.']
         ];
