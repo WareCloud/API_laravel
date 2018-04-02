@@ -27,6 +27,7 @@ class ConfigurationTest extends EndpointTest
 
         $data = [
             'software_id'   => 1,
+            'name'          => 'Test configuration',
             'content'       => 'this is some content'
         ];
 
@@ -46,6 +47,7 @@ class ConfigurationTest extends EndpointTest
                 'data' => [
                     'user_id'       => 1,
                     'software_id'   => 1,
+                    'name'          => $data['name'],
                     'content'       => $data['content']
                 ]
             ]);
@@ -53,15 +55,16 @@ class ConfigurationTest extends EndpointTest
         $this->json('GET', '/configuration/1', [], ['Authorization' => "Bearer $token"])
             ->assertStatus(200);
 
-        $data = [
+        $data1 = [
             'content' => 'newcontent'
         ];
-        $this->json('PUT', '/configuration/1', $data, ['Authorization' => "Bearer $token"])
+        $this->json('PUT', '/configuration/1', $data1, ['Authorization' => "Bearer $token"])
             ->assertStatus(200)
             ->assertJsonStructure([
                 'data' => [
                     'user_id',
                     'software_id',
+                    'name',
                     'content',
                     'updated_at',
                     'created_at',
@@ -72,7 +75,33 @@ class ConfigurationTest extends EndpointTest
                 'data' => [
                     'user_id'       => 1,
                     'software_id'   => 1,
-                    'content'       => $data['content']
+                    'name'          => $data['name'],
+                    'content'       => $data1['content']
+                ]
+            ]);
+
+        $data2 = [
+            'name' => 'Test configuration new'
+        ];
+        $this->json('PUT', '/configuration/1', $data2, ['Authorization' => "Bearer $token"])
+            ->assertStatus(200)
+            ->assertJsonStructure([
+                'data' => [
+                    'user_id',
+                    'software_id',
+                    'name',
+                    'content',
+                    'updated_at',
+                    'created_at',
+                    'id'
+                ]
+            ])
+            ->assertJson([
+                'data' => [
+                    'user_id'       => 1,
+                    'software_id'   => 1,
+                    'name'          => $data2['name'],
+                    'content'       => $data1['content']
                 ]
             ]);
 
@@ -92,13 +121,20 @@ class ConfigurationTest extends EndpointTest
         $token = User::find(1)->generateToken();
 
         $errors = [
-            'software_id'   => ['software_id'   => ['The software id field is required.']],
-            'content'       => ['content'       => ['The content field is required.']]
+            [
+                'software_id'   => ['The software id field is required.'],
+                'name'          => ['The name field is required.'],
+                'content'       => ['The content field is required.']
+            ],
+            [
+                'name'          => ['The name field is required when content is not present.'],
+                'content'       => ['The content field is required when name is not present.']
+            ]
         ];
 
         $endpoints = [
-            ['endpoint' => '/configuration',    'methods' => ['POST'],   'errors' => $errors['software_id'] + $errors['content']],
-            ['endpoint' => '/configuration/1',  'methods' => ['PUT'],    'errors' => $errors['content']]
+            ['endpoint' => '/configuration',    'methods' => ['POST'],   'errors' => $errors[0]],
+            ['endpoint' => '/configuration/1',  'methods' => ['PUT'],    'errors' => $errors[1]]
         ];
 
         $this->verifyEndpointsFields($endpoints, [], $token);

@@ -43,13 +43,15 @@ class ConfigurationController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'software_id' => 'required|exists:softwares,id',
-            'content' => 'required'
+            'software_id'   => 'required|exists:softwares,id',
+            'name'          => 'required',
+            'content'       => 'required'
         ]);
         $configuration = Configuration::create([
-            'user_id' => Auth::guard('api')->id(),
-            'software_id' => $data['software_id'],
-            'content' => $data['content']
+            'user_id'       => Auth::guard('api')->id(),
+            'software_id'   => $data['software_id'],
+            'name'          => $data['name'],
+            'content'       => $data['content']
         ]);
         return response()->json([
             'data' => $configuration
@@ -92,12 +94,11 @@ class ConfigurationController extends Controller
         $this->authorize('update', $configuration);
 
         $data = $request->validate([
-            'content' => 'required'
+            'name'      => 'required_without:content',
+            'content'   => 'required_without:name'
         ]);
 
-        $configuration->update([
-            'content' => $data['content']
-        ]);
+        $configuration->update($data);
 
         return ['data' => $configuration];
     }

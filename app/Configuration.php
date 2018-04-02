@@ -13,7 +13,7 @@ class Configuration extends Model
      */
     protected $table = 'configurations';
 
-    protected $fillable = ['user_id', 'software_id', 'content'];
+    protected $fillable = ['user_id', 'name', 'software_id', 'content'];
 
     public function software()
     {
