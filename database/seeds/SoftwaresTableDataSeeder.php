@@ -35,7 +35,7 @@ class SoftwaresTableDataSeeder extends Seeder
             'vendor'        => 'Microsoft',
             'vendor_url'    => 'https://www.skype.com',
             'comment'       => 'Skype est un logiciel qui permet aux utilisateurs de passer des appels téléphoniques ou vidéo via Internet, ainsi que le partage d\'écran.',
-            'download_url'  => 'https://download.skype.com/1e7b2f639d4b3d3de4d0bb158c680cab/SkypeSetupFull.exe',
+            'download_url'  => 'https://go.skype.com/classic.skype',
             'icon_url'      => '/images/softwares/Skype.svg'
         ],
         [
@@ -80,7 +80,7 @@ class SoftwaresTableDataSeeder extends Seeder
             'vendor'        => 'VideoLAN',
             'vendor_url'    => 'https://www.videolan.org/vlc',
             'comment'       => 'VLC media player (VLC) (à l\'origine VideoLAN Client) est un lecteur multimédia libre issu du projet VideoLAN. Ce logiciel est multiplateforme puisqu\'il fonctionne sous Windows, toutes les tendances GNU/Linux, BSD, OS X, iOS, BeOS, Solaris, Android8, QNX et Pocket PC soit en tout près de 20 plates-formes. Il est distribué sous licence GNU GPL.',
-            'download_url'  => 'http://ftp.free.org/mirrors/videolan/vlc/2.2.8/win32/vlc-2.2.8-win32.exe',
+            'download_url'  => 'https://get.videolan.org/vlc/3.0.1/win32/vlc-3.0.1-win32.exe',
             'icon_url'      => '/images/softwares/VLC.svg'
         ],
         [
@@ -89,7 +89,7 @@ class SoftwaresTableDataSeeder extends Seeder
             'vendor'        => 'Slack Technologies',
             'vendor_url'    => 'https://slack.com',
             'comment'       => 'Slack est une plate-forme de communication collaborative propriétaire ainsi qu\'un logiciel de gestion de projets créé par Stewart Butterfield en août 2013 et officiellement lancée en février 2014.',
-            'download_url'  => 'https://downloads.slack-edge.com/releases_x64/SlackSetup.exe',
+            'download_url'  => 'https://slack.com/ssb/download-win64',
             'icon_url'      => '/images/softwares/Slack.svg'
         ],
         [
