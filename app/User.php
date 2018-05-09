@@ -15,7 +15,8 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'login', 'password',
+        'login',
+        'password',
     ];
 
     /**
@@ -25,7 +26,8 @@ class User extends Authenticatable
      */
     protected $hidden = [
         'id',
-        'password', 'remember_token',
+        'password',
+        'remember_token',
     ];
 
     public function generateToken()

@@ -44,7 +44,7 @@ class ConfigurationController extends Controller
     {
         $data = $request->validate([
             'software_id'   => 'required|exists:softwares,id',
-            'name'          => 'required',
+            'name'          => 'required|string|max:191',
             'content'       => 'required'
         ]);
 
@@ -98,7 +98,7 @@ class ConfigurationController extends Controller
         $this->authorize('update', $configuration);
 
         $data = $request->validate([
-            'name'      => 'required_without:content',
+            'name'      => 'required_without:content|string|max:191',
             'content'   => 'required_without:name'
         ]);
 
