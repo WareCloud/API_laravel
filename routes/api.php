@@ -35,5 +35,9 @@ Route::middleware('auth:api')->group(function () {
     Route::resource('configuration', 'ConfigurationController', ['only' => [
         'index', 'show', 'store', 'update', 'destroy'
     ]]);
+
+    Route::resource('bundle', 'BundleController', ['only' => [
+        'index', 'show', 'store', 'update', 'destroy'
+    ]]);
 });
 

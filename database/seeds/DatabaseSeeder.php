@@ -14,7 +14,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             UsersTableDataSeeder::class,
             SoftwaresTableDataSeeder::class,
-            ConfigurationsTableDataSeeder::class
+            ConfigurationsTableDataSeeder::class,
+            BundlesTableSeeder::class
         ]);
     }
 }

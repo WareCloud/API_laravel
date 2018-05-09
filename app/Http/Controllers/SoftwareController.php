@@ -15,6 +15,7 @@ class SoftwareController extends Controller
     public function index()
     {
         $softwares = \App\Software::all();
+
         return ['data' => $softwares];
     }
 
