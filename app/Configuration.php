@@ -15,6 +15,10 @@ class Configuration extends Model
 
     protected $fillable = ['user_id', 'name', 'software_id', 'content'];
 
+    protected $hidden = [
+        'user_id',
+    ];
+
     public function software()
     {
         return $this->belongsTo(Software::class);

@@ -35,7 +35,6 @@ class ConfigurationTest extends EndpointTest
             ->assertStatus(201)
             ->assertJsonStructure([
                 'data' => [
-                    'user_id',
                     'software_id',
                     'content',
                     'updated_at',
@@ -45,7 +44,6 @@ class ConfigurationTest extends EndpointTest
             ])
             ->assertJson([
                 'data' => [
-                    'user_id'       => 1,
                     'software_id'   => 1,
                     'name'          => $data['name'],
                     'content'       => $data['content']
@@ -62,7 +60,6 @@ class ConfigurationTest extends EndpointTest
             ->assertStatus(200)
             ->assertJsonStructure([
                 'data' => [
-                    'user_id',
                     'software_id',
                     'name',
                     'content',
@@ -73,7 +70,6 @@ class ConfigurationTest extends EndpointTest
             ])
             ->assertJson([
                 'data' => [
-                    'user_id'       => 1,
                     'software_id'   => 1,
                     'name'          => $data['name'],
                     'content'       => $data1['content']
@@ -87,7 +83,6 @@ class ConfigurationTest extends EndpointTest
             ->assertStatus(200)
             ->assertJsonStructure([
                 'data' => [
-                    'user_id',
                     'software_id',
                     'name',
                     'content',
@@ -98,7 +93,6 @@ class ConfigurationTest extends EndpointTest
             ])
             ->assertJson([
                 'data' => [
-                    'user_id'       => 1,
                     'software_id'   => 1,
                     'name'          => $data2['name'],
                     'content'       => $data1['content']

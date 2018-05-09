@@ -18,7 +18,6 @@ class RegisterTest extends EndpointTest
             ->assertStatus(201)
             ->assertJsonStructure([
                 'data' => [
-                    'id',
                     'login',
                     'created_at',
                     'updated_at',

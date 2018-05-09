@@ -34,7 +34,6 @@ class LoginTest extends EndpointTest
             ->assertStatus(200)
             ->assertJsonStructure([
                 'data' => [
-                    'id',
                     'login',
                     'created_at',
                     'updated_at',

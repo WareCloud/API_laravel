@@ -21,7 +21,6 @@ class UserTest extends EndpointTest
             ->assertStatus(200)
             ->assertJsonStructure([
                 'data' => [
-                    'id',
                     'login',
                     'created_at',
                     'updated_at',
@@ -30,7 +29,6 @@ class UserTest extends EndpointTest
             ])
             ->assertJson([
                 'data' => [
-                    'id'        => 1,
                     'login'     => 'admin',
                     'api_token' => $token
                 ]
@@ -58,7 +56,6 @@ class UserTest extends EndpointTest
             ->assertStatus(200)
             ->assertJsonStructure([
                 'data' => [
-                    'id',
                     'login',
                     'created_at',
                     'updated_at',
@@ -67,7 +64,6 @@ class UserTest extends EndpointTest
             ])
             ->assertJson([
                 'data' => [
-                    'id'        => 1,
                     'login'     => 'admin',
                     'api_token' => $token
                 ]
