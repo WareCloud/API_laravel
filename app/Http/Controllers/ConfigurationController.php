@@ -19,7 +19,7 @@ class ConfigurationController extends Controller
         $configurations = \App\Configuration::with('software:id,name,vendor,vendor_url')
             ->where('user_id', Auth::guard('api')->user()->id)
             ->get()
-            ->makeHidden(['user_id', 'software_id', 'content']);
+            ->makeHidden(['content']);
 
         return ['data' => $configurations];
     }
@@ -47,12 +47,16 @@ class ConfigurationController extends Controller
             'name'          => 'required',
             'content'       => 'required'
         ]);
+
         $configuration = Configuration::create([
             'user_id'       => Auth::guard('api')->id(),
             'software_id'   => $data['software_id'],
             'name'          => $data['name'],
             'content'       => $data['content']
         ]);
+
+        $configuration->load('software:id,name,vendor,vendor_url');
+
         return response()->json([
             'data' => $configuration
         ], 201);
@@ -100,6 +104,8 @@ class ConfigurationController extends Controller
 
         $configuration->update($data);
 
+        $configuration->load('software:id,name,vendor,vendor_url');
+
         return ['data' => $configuration];
     }
 
@@ -114,6 +120,7 @@ class ConfigurationController extends Controller
         $this->authorize('delete', $configuration);
 
         $configuration->delete();
+
         return response()->json(null, 204);
     }
 }

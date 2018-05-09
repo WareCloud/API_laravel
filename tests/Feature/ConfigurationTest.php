@@ -31,22 +31,29 @@ class ConfigurationTest extends EndpointTest
             'content'       => 'this is some content'
         ];
 
+        $soft = \App\Software::find(1);
+
         $this->json('POST', '/configuration', $data, ['Authorization' => "Bearer $token"])
             ->assertStatus(201)
             ->assertJsonStructure([
                 'data' => [
-                    'software_id',
+                    'id',
                     'content',
                     'updated_at',
                     'created_at',
-                    'id'
+                    'software'
                 ]
             ])
             ->assertJson([
                 'data' => [
-                    'software_id'   => 1,
                     'name'          => $data['name'],
-                    'content'       => $data['content']
+                    'content'       => $data['content'],
+                    'software'      => [
+                        'id'            => $soft->id,
+                        'name'          => $soft->name,
+                        'vendor'        => $soft->vendor,
+                        'vendor_url'    => $soft->vendor_url
+                    ]
                 ]
             ]);
 
@@ -60,19 +67,24 @@ class ConfigurationTest extends EndpointTest
             ->assertStatus(200)
             ->assertJsonStructure([
                 'data' => [
-                    'software_id',
+                    'id',
                     'name',
                     'content',
                     'updated_at',
                     'created_at',
-                    'id'
+                    'software'
                 ]
             ])
             ->assertJson([
                 'data' => [
-                    'software_id'   => 1,
                     'name'          => $data['name'],
-                    'content'       => $data1['content']
+                    'content'       => $data1['content'],
+                    'software'      => [
+                        'id'            => $soft->id,
+                        'name'          => $soft->name,
+                        'vendor'        => $soft->vendor,
+                        'vendor_url'    => $soft->vendor_url
+                    ]
                 ]
             ]);
 
@@ -83,19 +95,24 @@ class ConfigurationTest extends EndpointTest
             ->assertStatus(200)
             ->assertJsonStructure([
                 'data' => [
-                    'software_id',
+                    'id',
                     'name',
                     'content',
                     'updated_at',
                     'created_at',
-                    'id'
+                    'software'
                 ]
             ])
             ->assertJson([
                 'data' => [
-                    'software_id'   => 1,
                     'name'          => $data2['name'],
-                    'content'       => $data1['content']
+                    'content'       => $data1['content'],
+                    'software'      => [
+                        'id'            => $soft->id,
+                        'name'          => $soft->name,
+                        'vendor'        => $soft->vendor,
+                        'vendor_url'    => $soft->vendor_url
+                    ]
                 ]
             ]);
 
@@ -139,7 +156,8 @@ class ConfigurationTest extends EndpointTest
         $token = User::find(1)->generateToken();
 
         $errors = [
-            'software_id' => ['The selected software id is invalid.']
+            'name'          => ['The name must be a string.'],
+            'software_id'   => ['The selected software id is invalid.']
         ];
 
         $endpoints = [
@@ -147,9 +165,9 @@ class ConfigurationTest extends EndpointTest
         ];
 
         $datas = [
-            ['software_id' => 0,       'content' => 'this is some content'],
-            ['software_id' => -5,      'content' => 'this is some content'],
-            ['software_id' => 'test',  'content' => 'this is some content']
+            ['name' => ['test'],    'software_id' => 0,       'content' => 'this is some content'],
+            ['name' => true,        'software_id' => -5,      'content' => 'this is some content'],
+            ['name' => 1,           'software_id' => 'test',  'content' => 'this is some content']
         ];
 
         $this->verifyEndpointsFields($endpoints, $datas, $token);
