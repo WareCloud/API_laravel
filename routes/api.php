@@ -43,5 +43,9 @@ Route::middleware('auth:api')->group(function () {
     Route::resource('bugreport', 'BugReportController', ['only' => [
         'store'
     ]]);
+
+    Route::resource('softwaresuggestion', 'SoftwareSuggestionController', ['only' => [
+        'store'
+    ]]);
 });
 
