@@ -46,6 +46,8 @@ class BugReportController extends Controller
         $user = Auth::guard('api')->user();
 
         $user->notify(new BugReportNotification($bugReport, $user));
+
+        return response()->json(null, 200);
     }
 
     /**

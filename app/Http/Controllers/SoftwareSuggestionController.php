@@ -46,6 +46,8 @@ class SoftwareSuggestionController extends Controller
         $user = Auth::guard('api')->user();
 
         $user->notify(new SoftwareSuggestionNotification($softwareSuggestion, $user));
+
+        return response()->json(null, 200);
     }
 
     /**
