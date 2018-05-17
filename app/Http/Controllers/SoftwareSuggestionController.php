@@ -39,7 +39,7 @@ class SoftwareSuggestionController extends Controller
     {
         $data = $request->validate([
             'name'      => 'required|string',
-            'website'   => 'required|string'
+            'website'   => 'required|url'
         ]);
 
         $softwareSuggestion = new SoftwareSuggestion($data);
