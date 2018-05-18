@@ -20,18 +20,10 @@ class UserTest extends EndpointTest
         $this->json('POST', '/user/password', $data, ['Authorization' => "Bearer $token"])
             ->assertStatus(200)
             ->assertJsonStructure([
-                'data' => [
-                    'login',
-                    'created_at',
-                    'updated_at',
-                    'api_token'
-                ]
+                'data'
             ])
             ->assertJson([
-                'data' => [
-                    'login'     => 'admin',
-                    'api_token' => $token
-                ]
+                'data' => 'Password successfully updated.',
             ]);
     }
 
