@@ -47,7 +47,9 @@ class SoftwareSuggestionController extends Controller
 
         $user->notify(new SoftwareSuggestionNotification($softwareSuggestion, $user));
 
-        return response()->json(null, 200);
+        return response()->json([
+            'data' => 'Software suggestion successfully submitted.'
+        ], 200);
     }
 
     /**

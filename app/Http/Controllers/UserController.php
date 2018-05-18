@@ -91,7 +91,7 @@ class UserController extends Controller
         $user->save();
 
         return response()->json([
-            'data' => $user
+            'data' => 'Password successfully updated.'
         ], 200);
     }
 

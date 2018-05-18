@@ -47,7 +47,9 @@ class BugReportController extends Controller
 
         $user->notify(new BugReportNotification($bugReport, $user));
 
-        return response()->json(null, 200);
+        return response()->json([
+            'data' => 'Bug report successfully submitted.'
+        ], 200);
     }
 
     /**
