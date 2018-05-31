@@ -23,7 +23,7 @@ class BundleController extends Controller
                 'bundle.software:id,name,vendor,vendor_url',
                 'bundle.configuration:id,name'
             ])
-            ->where('user_id', Auth::guard('api')->user()->id)
+            ->where('user_id', Auth::guard('api')->id())
             ->get();
 
         return ['data' => $bundles];

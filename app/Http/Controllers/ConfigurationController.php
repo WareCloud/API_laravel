@@ -17,7 +17,7 @@ class ConfigurationController extends Controller
     public function index()
     {
         $configurations = \App\Configuration::with('software:id,name,vendor,vendor_url')
-            ->where('user_id', Auth::guard('api')->user()->id)
+            ->where('user_id', Auth::guard('api')->id())
             ->get()
             ->makeHidden(['content']);
 
