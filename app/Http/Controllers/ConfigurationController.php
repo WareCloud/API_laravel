@@ -99,7 +99,7 @@ class ConfigurationController extends Controller
 
         $data = $request->validate([
             'name'      => 'required_without:content|string|max:191',
-            'content'   => 'required_without:name'
+            'content'   => 'required_without:name|string'
         ]);
 
         $configuration->update($data);
