@@ -23,7 +23,7 @@ class UserTest extends EndpointTest
                 'data'
             ])
             ->assertJson([
-                'data' => 'Password successfully updated.',
+                'data' => 'Password successfully updated.'
             ]);
     }
 
