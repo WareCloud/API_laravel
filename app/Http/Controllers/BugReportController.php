@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\BugReport;
-use App\Notifications\BugReportNotification;
+use App\Notifications\SlackNotification;
+use App\Notify;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class BugReportController extends Controller
 {
@@ -42,10 +42,7 @@ class BugReportController extends Controller
             'description'   => 'required|string'
         ]);
 
-        $bugReport = new BugReport($data);
-        $user = Auth::guard('api')->user();
-
-        $user->notify(new BugReportNotification($bugReport, $user));
+        (new Notify)->notify(new SlackNotification(new BugReport($data)));
 
         return response()->json([
             'data' => 'Bug report successfully submitted.'

@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Notifications\SlackNotification;
+use App\Notify;
 use App\SoftwareSuggestion;
-use App\Notifications\SoftwareSuggestionNotification;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class SoftwareSuggestionController extends Controller
 {
@@ -42,10 +42,7 @@ class SoftwareSuggestionController extends Controller
             'website'   => 'required|url'
         ]);
 
-        $softwareSuggestion = new SoftwareSuggestion($data);
-        $user = Auth::guard('api')->user();
-
-        $user->notify(new SoftwareSuggestionNotification($softwareSuggestion, $user));
+        (new Notify)->notify(new SlackNotification(new SoftwareSuggestion($data)));
 
         return response()->json([
             'data' => 'Software suggestion successfully submitted.'
