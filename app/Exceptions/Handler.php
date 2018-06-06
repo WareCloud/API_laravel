@@ -3,9 +3,9 @@
 namespace App\Exceptions;
 
 use Exception;
+use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
@@ -26,8 +26,7 @@ class Handler extends ExceptionHandler
         \Illuminate\Session\TokenMismatchException::class,
         \Illuminate\Validation\ValidationException::class,
         \Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException::class,
-        \Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException::class,
-        \Illuminate\Auth\Access\AuthorizationException::class
+        \Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException::class
     ];
 
     /**
@@ -63,19 +62,15 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-        // This will replace our 404 response with
-        // a JSON response.
+        // This will replace our 404 response with a JSON response.
         if ($exception instanceof ModelNotFoundException
             || $exception instanceof NotFoundHttpException
             || $exception instanceof MethodNotAllowedHttpException)
-        {
             return response()->json([
                 'error' => 'Not found.'
             ], 404);
-        }
 
-        // This will replace our 403 response with
-        // a JSON response.
+        // This will replace our 403 response with a JSON response.
         if ($exception instanceof AccessDeniedHttpException
             || $exception instanceof AuthorizationException)
             return response()->json([
