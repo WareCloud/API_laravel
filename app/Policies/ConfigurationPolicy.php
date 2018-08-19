@@ -57,6 +57,14 @@ class ConfigurationPolicy
         return $this->access($user, $configuration);
     }
 
+    /**
+     *
+     * Determine whether the user can access the given configuration.
+     * @param User $user
+     * @param Configuration $configuration
+     * @return bool
+     *
+     */
     public function access(User $user, Configuration $configuration)
     {
         return (int)$user->id === (int)$configuration->user_id;

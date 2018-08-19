@@ -30,20 +30,23 @@ class BugReportController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
+     * Send a bug report notification to Slack
+     * Requires a bug title and a description
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
+        // Validate the request
         $data = $request->validate([
             'title'         => 'required|string',
             'description'   => 'required|string'
         ]);
 
+        // Send a Slack notification
         (new Notify)->notify(new SlackNotification(new BugReport($data)));
 
+        // Return a confirmation message
         return response()->json([
             'data' => 'Bug report successfully submitted.'
         ], 200);

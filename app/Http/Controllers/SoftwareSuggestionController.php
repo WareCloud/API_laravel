@@ -30,20 +30,23 @@ class SoftwareSuggestionController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
+     * Send a software suggestion notification to Slack
+     * Requires a software name and its vendor website
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
+        // Validate the request
         $data = $request->validate([
             'name'      => 'required|string',
             'website'   => 'required|url'
         ]);
 
+        // Send a Slack notifications
         (new Notify)->notify(new SlackNotification(new SoftwareSuggestion($data)));
 
+        // Return a confirmation message
         return response()->json([
             'data' => 'Software suggestion successfully submitted.'
         ], 200);

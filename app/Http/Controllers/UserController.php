@@ -64,32 +64,39 @@ class UserController extends Controller
     }
 
     /**
-     * Update password in storage.
+     * Update the password associated to the current user.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function updatePassword(Request $request)
     {
+        // Check that the user is logged in
         $user = Auth::guard('api')->user();
 
+        // Validate the request
         $this->validate($request, [
             'password'                  => 'required|string',
             'new_password'              => 'required|string|min:6|confirmed',
             'new_password_confirmation' => 'required|string|min:6'
         ]);
 
+        // Check that the current user's password match
         if (!Hash::check($request->input('password'), $user->password))
         {
+            // Return a 422 status code Invalid password if the user entered an invalid password
             return response()->json([
                 'error' => 'Invalid password.'
             ], 422);
         }
 
+        // Update the password with the new specified password
         $user->password = Hash::make($request->input('new_password'));
 
+        // Save the user informations in the database
         $user->save();
 
+        // Return a 200 status code Password successfully updated
         return response()->json([
             'data' => 'Password successfully updated.'
         ], 200);

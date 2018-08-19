@@ -8,14 +8,16 @@ use Illuminate\Http\Request;
 class SoftwareController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display all softwares.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
+        // Get all the softwares stored in database
         $softwares = \App\Software::all();
 
+        // Return all the softwares' details
         return ['data' => $softwares];
     }
 
@@ -41,13 +43,14 @@ class SoftwareController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified software.
      *
      * @param  \App\Software  $software
      * @return \Illuminate\Http\Response
      */
     public function show(Software $software)
     {
+        // Return the specified software's details
         return ['data' => $software];
     }
 
