@@ -17,7 +17,9 @@ class Configuration extends Model
         'user_id',
         'name',
         'software_id',
-        'content'
+        'content',
+        'filename',
+        'path'
     ];
 
     protected $hidden = [

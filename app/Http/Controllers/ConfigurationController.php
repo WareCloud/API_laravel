@@ -49,7 +49,10 @@ class ConfigurationController extends Controller
         $data = $request->validate([
             'software_id'   => 'required|exists:softwares,id',
             'name'          => 'required|string|max:191',
-            'content'       => 'required'
+            'content'       => 'required',
+            'filename'      => 'required|string|max:191',
+            'path'          => 'required|string|max:191'
+
         ]);
 
         // Store the the newly created configuration
@@ -57,7 +60,9 @@ class ConfigurationController extends Controller
             'user_id'       => Auth::guard('api')->id(),
             'software_id'   => $data['software_id'],
             'name'          => $data['name'],
-            'content'       => $data['content']
+            'content'       => $data['content'],
+            'filename'      => $data['filename'],
+            'path'          => $data['path']
         ]);
 
         // Load the configuration's details
@@ -102,14 +107,17 @@ class ConfigurationController extends Controller
      * @param  \App\Configuration  $configuration
      * @return \Illuminate\Http\Response
      */
+    /*
     public function update(Request $request, Configuration $configuration)
     {
         // Check that the current user own the specified configuration
         $this->authorize('update', $configuration);
 
         $data = $request->validate([
-            'name'      => 'required_without:content|string|max:191',
-            'content'   => 'required_without:name|string'
+            'name'      => 'string|max:191',
+            'content'   => 'string',
+            'filename'  => 'string|max:191',
+            'path'      => 'string|max:191'
         ]);
 
         // Update the configuration in database
@@ -121,6 +129,7 @@ class ConfigurationController extends Controller
         // Return the configuration's details
         return ['data' => $configuration];
     }
+    */
 
     /**
      * Remove the specified resource from storage.

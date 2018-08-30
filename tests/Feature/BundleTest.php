@@ -308,7 +308,9 @@ class BundleTest extends EndpointTest
             'user_id'       => $user->id,
             'software_id'   => 1,
             'name'          => 'test',
-            'content'       => 'test'
+            'content'       => 'test',
+            'filename'      => 'filename',
+            'path'          => 'path'
         ]);
 
         $datas2 = ['name' => 'test',  'bundle' => [['software_id' => 1,  'configuration_id' => $conf->id]]];

@@ -28,7 +28,9 @@ class ConfigurationTest extends EndpointTest
         $data = [
             'software_id'   => 1,
             'name'          => 'Test configuration',
-            'content'       => 'this is some content'
+            'content'       => 'this is some content',
+            'filename'      => 'filename.tgz',
+            'path'          => '/path/'
         ];
 
         $soft = \App\Software::find(1);
@@ -39,6 +41,8 @@ class ConfigurationTest extends EndpointTest
                 'data' => [
                     'id',
                     'content',
+                    'filename',
+                    'path',
                     'updated_at',
                     'created_at',
                     'software'
@@ -48,6 +52,8 @@ class ConfigurationTest extends EndpointTest
                 'data' => [
                     'name'          => $data['name'],
                     'content'       => $data['content'],
+                    'filename'      => $data['filename'],
+                    'path'          => $data['path'],
                     'software'      => [
                         'id'            => $soft->id,
                         'name'          => $soft->name,
@@ -60,6 +66,7 @@ class ConfigurationTest extends EndpointTest
         $this->json('GET', '/configuration/1', [], ['Authorization' => "Bearer $token"])
             ->assertStatus(200);
 
+        /*
         $data1 = [
             'content' => 'newcontent'
         ];
@@ -70,6 +77,8 @@ class ConfigurationTest extends EndpointTest
                     'id',
                     'name',
                     'content',
+                    'filename',
+                    'path',
                     'updated_at',
                     'created_at',
                     'software'
@@ -79,6 +88,8 @@ class ConfigurationTest extends EndpointTest
                 'data' => [
                     'name'          => $data['name'],
                     'content'       => $data1['content'],
+                    'filename'      => $data['filename'],
+                    'path'          => $data['path'],
                     'software'      => [
                         'id'            => $soft->id,
                         'name'          => $soft->name,
@@ -107,6 +118,8 @@ class ConfigurationTest extends EndpointTest
                 'data' => [
                     'name'          => $data2['name'],
                     'content'       => $data1['content'],
+                    'filename'      => $data['filename'],
+                    'path'          => $data['path'],
                     'software'      => [
                         'id'            => $soft->id,
                         'name'          => $soft->name,
@@ -115,6 +128,7 @@ class ConfigurationTest extends EndpointTest
                     ]
                 ]
             ]);
+        */
 
         $this->json('DELETE', '/configuration/1', $data, ['Authorization' => "Bearer $token"])
             ->assertStatus(204);
@@ -135,17 +149,14 @@ class ConfigurationTest extends EndpointTest
             [
                 'software_id'   => ['The software id field is required.'],
                 'name'          => ['The name field is required.'],
-                'content'       => ['The content field is required.']
-            ],
-            [
-                'name'          => ['The name field is required when content is not present.'],
-                'content'       => ['The content field is required when name is not present.']
+                'content'       => ['The content field is required.'],
+                'filename'      => ['The filename field is required.'],
+                'path'          => ['The path field is required.']
             ]
         ];
 
         $endpoints = [
-            ['endpoint' => '/configuration',    'methods' => ['POST'],   'errors' => $errors[0]],
-            ['endpoint' => '/configuration/1',  'methods' => ['PUT'],    'errors' => $errors[1]]
+            ['endpoint' => '/configuration',    'methods' => ['POST'],   'errors' => $errors[0]]
         ];
 
         $this->verifyEndpointsFields($endpoints, [], $token);
@@ -157,7 +168,9 @@ class ConfigurationTest extends EndpointTest
 
         $errors = [
             'name'          => ['The name must be a string.'],
-            'software_id'   => ['The selected software id is invalid.']
+            'software_id'   => ['The selected software id is invalid.'],
+            'filename'      => ['The filename must be a string.'],
+            'path'          => ['The path must be a string.']
         ];
 
         $endpoints = [
@@ -165,9 +178,9 @@ class ConfigurationTest extends EndpointTest
         ];
 
         $datas = [
-            ['name' => ['test'],    'software_id' => 0,       'content' => 'this is some content'],
-            ['name' => true,        'software_id' => -5,      'content' => 'this is some content'],
-            ['name' => 1,           'software_id' => 'test',  'content' => 'this is some content']
+            ['name' => ['test'],    'software_id' => 0,       'content' => 'this is some content', 'filename' => ['filename'],  'path' => ['path']],
+            ['name' => true,        'software_id' => -5,      'content' => 'this is some content', 'filename' => true,          'path' => true],
+            ['name' => 1,           'software_id' => 'test',  'content' => 'this is some content', 'filename' => 1,             'path' => 1]
         ];
 
         $this->verifyEndpointsFields($endpoints, $datas, $token);

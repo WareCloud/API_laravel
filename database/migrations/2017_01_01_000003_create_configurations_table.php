@@ -19,6 +19,8 @@ class CreateConfigurationsTable extends Migration
             $table->unsignedInteger('software_id');
             $table->string('name');
             $table->binary('content');
+            $table->string('filename');
+            $table->string('path');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');
